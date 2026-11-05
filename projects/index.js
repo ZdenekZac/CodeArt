@@ -42,7 +42,7 @@ let atoms = [];
 
 const animate = () => {
   atoms.forEach((atom, index) => {
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'green';
 
     atom.draw();
     atom.updateSpeed();
@@ -68,6 +68,7 @@ class Atom {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+    this.z = z;
     this.radius = Math.random() * 2 + 2;
     this.speedX = Math.random() * 4 - 2; //-2 +2
     this.speedY = Math.random() * 4 - 2; //-2 +2
@@ -99,7 +100,7 @@ let degree = 0;
 const generateAtoms = () => {
   atoms.push(new Atom(canvas.width / 2 + point.x * 200, canvas.height / 2 + point.y * 200));
   point.x = Math.cos((degree / 180) * Math.PI);
-  point.y = 1;
+  point.y = Math.cos((degree / 180) * Math.PI);
 
   degree++;
   requestAnimationFrame(generateAtoms);
