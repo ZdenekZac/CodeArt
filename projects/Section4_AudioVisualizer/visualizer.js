@@ -1,7 +1,7 @@
 const microphone = new Microphone();
 
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -10,7 +10,7 @@ class Ball {
     this.x = x;
     this.y = y;
     this.radius = 8;
-    this.color = "white";
+    this.color = 'white';
     this.jumpForce = 0;
     this.fallForce = 0.1;
   }
@@ -28,6 +28,7 @@ class Ball {
 }
 
 let balls = [];
+
 const generateBalls = () => {
   const distance = 30;
   const amountOfBalls = canvas.width / distance - 2;
@@ -41,6 +42,10 @@ generateBalls();
 function animate() {
   if (microphone.initialized) {
     const samples = microphone.getSamples();
+
+    balls.forEach((ball) => {
+      ball.draw();
+    });
   }
   requestAnimationFrame(animate);
 }
