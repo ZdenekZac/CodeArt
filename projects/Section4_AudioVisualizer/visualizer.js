@@ -13,6 +13,7 @@ class Ball {
     this.color = 'white';
     this.jumpForce = 0;
     this.fallForce = 0.1;
+    this.isFalling = true;
   }
 
   draw() {
@@ -22,9 +23,18 @@ class Ball {
     ctx.fill();
   }
 
-  fall() {}
+  fall() {
+    this.jumpForce = 0;
+    console.log(this.jumpforce);
+    this.y += this.fallForce;
+    this.fallForce += 0.05;
+  }
 
-  jump() {}
+  jump() {
+    this.fallForce = 0;
+    this.y -= this.jumpForce;
+    this.jumpForce -= 0.05;
+  }
 }
 
 let balls = [];
@@ -41,9 +51,26 @@ generateBalls();
 
 function animate() {
   if (microphone.initialized) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     const samples = microphone.getSamples();
 
     balls.forEach((ball) => {
+<<<<<<< HEAD
+=======
+      if (ball.isFalling && ball.y < canvas.height / 2) {
+        ball.fall();
+      } else if (ball.y > canvas.height / 2) {
+        ball.isFalling = false;
+        ball.jumpForce = 2;
+        //balls jump force
+      }
+      if (ball.isFalling == false) {
+        ball.jump();
+        if (ball.jumpForce <= 0) {
+          ball.isFalling = true;
+        }
+      }
+>>>>>>> 94b70885a6205a76f2ed7b0e79fd276bc714005f
       ball.draw();
     });
   }
