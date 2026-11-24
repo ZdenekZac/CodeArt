@@ -13,6 +13,7 @@ class Microphone {
           this.dataArray = new Uint8Array(bufferLength);
           this.microphone.connect(this.analyzer);
           this.initialized = true;
+          console.log("mic ok");
         }.bind(this),
       )
       .catch(function (err) {

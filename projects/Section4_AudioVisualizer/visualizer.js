@@ -1,7 +1,7 @@
 const microphone = new Microphone();
 
-const canvas = document.getElementById('myCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -10,7 +10,7 @@ class Ball {
     this.x = x;
     this.y = y;
     this.radius = 8;
-    this.color = 'white';
+    this.color = "red";
     this.jumpForce = 0;
     this.fallForce = 0.1;
     this.isFalling = true;
@@ -25,7 +25,6 @@ class Ball {
 
   fall() {
     this.jumpForce = 0;
-    console.log(this.jumpforce);
     this.y += this.fallForce;
     this.fallForce += 0.05;
   }
@@ -43,7 +42,7 @@ const generateBalls = () => {
   const distance = 30;
   const amountOfBalls = canvas.width / distance - 2;
   for (let i = 0; i < amountOfBalls; i++) {
-    balls.push(new Ball(distance + i * distance, 500));
+    balls.push(new Ball(distance + i * distance, 150));
   }
 };
 
@@ -54,14 +53,12 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const samples = microphone.getSamples();
 
-    balls.forEach((ball) => {
-<<<<<<< HEAD
-=======
+    balls.forEach((ball, index) => {
       if (ball.isFalling && ball.y < canvas.height / 2) {
         ball.fall();
       } else if (ball.y > canvas.height / 2) {
         ball.isFalling = false;
-        ball.jumpForce = 2;
+        ball.jumpForce = Math.abs(samples[index]) * 10;
         //balls jump force
       }
       if (ball.isFalling == false) {
@@ -70,7 +67,6 @@ function animate() {
           ball.isFalling = true;
         }
       }
->>>>>>> 94b70885a6205a76f2ed7b0e79fd276bc714005f
       ball.draw();
     });
   }
