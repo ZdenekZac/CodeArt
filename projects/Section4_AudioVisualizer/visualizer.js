@@ -25,15 +25,14 @@ class Ball {
 
   fall() {
     this.jumpForce = 0;
-    console.log(this.jumpforce);
     this.y += this.fallForce;
-    this.fallForce += 0.05;
+    this.fallForce += 0.15;
   }
 
   jump() {
     this.fallForce = 0;
     this.y -= this.jumpForce;
-    this.jumpForce -= 0.05;
+    this.jumpForce -= 0.15;
   }
 }
 
@@ -54,14 +53,13 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const samples = microphone.getSamples();
 
-    balls.forEach((ball) => {
-<<<<<<< HEAD
-=======
+    balls.forEach((ball, index) => {
       if (ball.isFalling && ball.y < canvas.height / 2) {
         ball.fall();
       } else if (ball.y > canvas.height / 2) {
         ball.isFalling = false;
-        ball.jumpForce = 2;
+        console.log(samples[index]);
+        ball.jumpForce = Math.abs(samples[index] * 10);
         //balls jump force
       }
       if (ball.isFalling == false) {
@@ -70,7 +68,6 @@ function animate() {
           ball.isFalling = true;
         }
       }
->>>>>>> 94b70885a6205a76f2ed7b0e79fd276bc714005f
       ball.draw();
     });
   }
