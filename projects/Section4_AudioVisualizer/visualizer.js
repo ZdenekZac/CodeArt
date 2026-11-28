@@ -26,13 +26,13 @@ class Ball {
   fall() {
     this.jumpForce = 0;
     this.y += this.fallForce;
-    this.fallForce += 0.05;
+    this.fallForce += 0.15;
   }
 
   jump() {
     this.fallForce = 0;
     this.y -= this.jumpForce;
-    this.jumpForce -= 0.05;
+    this.jumpForce -= 0.15;
   }
 }
 
@@ -58,7 +58,12 @@ function animate() {
         ball.fall();
       } else if (ball.y > canvas.height / 2) {
         ball.isFalling = false;
+<<<<<<< HEAD
         ball.jumpForce = Math.abs(samples[index]) * 10;
+=======
+        console.log(samples[index]);
+        ball.jumpForce = Math.abs(samples[index] * 10);
+>>>>>>> 48fd9e144edc49ebef07d0864de2ac26079a887a
         //balls jump force
       }
       if (ball.isFalling == false) {
